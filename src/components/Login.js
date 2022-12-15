@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import  { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -41,7 +41,7 @@ const Login = () => {
           },
         }}
       >
-        <h1>Create User in "Fake Shop - API":</h1>
+        <h1>Create User in Fake Shop - API:</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="email">E-mail:</label>
           <TextField

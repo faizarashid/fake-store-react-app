@@ -1,34 +1,29 @@
-import * as React from "react";
-import PropTypes from "prop-types";
+import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Product from "./Product";
-import NotFound from "./NotFound";
-import App from "../App";
-import {
-  NavLink,
-  Route,
-  Router,
-  Routes,
-  useLocation,
-  useRoutes,
-} from "react-router-dom";
+import PropTypes from "prop-types";
+import * as React from "react";
+import styled from "styled-components";
+import { NavLink, useLocation } from "react-router-dom";
+import CartContext from "../Context/Cart/CartContext";
+import { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CartIcon from "../assets/cart.svg";
 
 const drawerWidth = 240;
 const navItems = ["Home", "Products", "Contact"];
 
 function NavBar(props) {
+  const [toggle, setToggle] = React.useState(false);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const location = useLocation();
@@ -36,6 +31,7 @@ function NavBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const { cartItems } = useContext(CartContext);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -65,7 +61,31 @@ function NavBar(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-
+  const CartCircle = styled.div`
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #13122e;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85em;
+    @media (max-width: 500px) {
+      position: initial;
+    }
+  `;
+  const NavCartItem = styled.div`
+    position: relative;
+    img {
+      @media (max-width: 500px) {
+        display: none;
+      }
+    }
+  `;
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar component="nav">
@@ -93,6 +113,18 @@ function NavBar(props) {
               </Button>
             ))}
           </Box>
+          <NavLink to="/cart" onClick={() => setToggle(!toggle)}>
+            <p>Cart</p>
+            <i className="fas fa-shopping-cart"></i>
+            <NavCartItem>
+              <img src={CartIcon} alt="Shopping cart" />
+              {/* If the number of cartItems is greater than 0, display the
+                    number of items in the cart */}
+              {cartItems.length > 0 && (
+                <CartCircle>{cartItems.length}</CartCircle>
+              )}
+            </NavCartItem>
+          </NavLink>
         </Toolbar>
       </AppBar>
       <Box component="nav">

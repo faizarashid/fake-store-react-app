@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar";
 import Button from "@mui/material/Button";
 import Product from "./components/Product";
 import NotFound from "./components/NotFound";
+import Cart from "./components/Cart";
 import ProductSlider from "./components/ProductSlider";
 import {
   NavLink,
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<App />} />
         <Route path="/products" element={<Product />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ProductSlider />

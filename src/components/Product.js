@@ -21,7 +21,7 @@ const Product = () => {
   return (
     <>
       {products?.map((item) => (
-        <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+        <Box key={item.id} sx={{ maxWidth: 400, flexGrow: 1 }}>
           <Card sx={{ maxWidth: 345 }} display="inline">
             <CardMedia
               component="img"
