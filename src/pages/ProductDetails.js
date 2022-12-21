@@ -15,7 +15,7 @@ const ProductDetails = ({ product }) => {
   return (
     <CardWrapper>
       <ProductImage src={product.image} alt={product.title} />
-      <ProductName>{product.name}</ProductName>
+      <ProductName>{product.title}</ProductName>
       <ProductCardPrice>{product.price}</ProductCardPrice>
       <ProductCardButtons>
         {!isInCart(product) && (

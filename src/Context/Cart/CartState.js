@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import CartContext from "./CartContext";
-import CartReducer from "./CartReducer";
-import { sumItems } from "./CartReducer";
+import CartReducer from "../../redux/reducer/CartReducer";
+import { sumItems } from "../../redux/reducer/CartReducer";
 import PropTypes from "prop-types";
 
 const CartState = ({ children }) => {

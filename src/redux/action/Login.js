@@ -3,25 +3,38 @@ import { useState } from "react";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-const Login = () => {
+import { useNavigate } from "react-router-dom";
+import propTypes from "prop-types";
+
+const Login = ({ token, setToken }) => {
   const [data, setData] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   function fetchRequest() {
-    fetch("https://fakestoreapi.com/auth/login", {
+    axios("https://fakestoreapi.com/auth/login", {
       method: "POST",
-      body: JSON.stringify({
-        username: "mor_2314",
-        password: "83r5^_",
-      }),
+      data: {
+        username: email,
+        password: password,
+      },
     })
-      .then((res) => res.json())
-      .then((json) => console.log(json));
+      .then((response) => {
+        setToken(response.data.token);
+        localStorage.setItem("userToken", response.data.token);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchRequest();
+  };
+  Login.propTypes = {
+    setToken: propTypes.func,
+    token: propTypes.string,
   };
   return (
     <>
@@ -69,8 +82,6 @@ const Login = () => {
         </form>
         <p>API response with user unique token:</p>
         {JSON.stringify(data)}
-        {/* <A name="Sample1"/>
-        <B name="Sample2"/> */}
       </Box>
     </>
   );

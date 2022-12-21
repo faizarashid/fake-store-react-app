@@ -1,4 +1,4 @@
-import { REMOVE_ITEM, ADD_TO_CART } from "./CartTypes";
+import { REMOVE_ITEM, ADD_TO_CART } from "../action/CartTypes";
 export const sumItems = (cartItems) => {
   Storage(cartItems);
   let itemCount = cartItems.reduce(

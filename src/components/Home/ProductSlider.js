@@ -5,8 +5,9 @@ import CardMedia from "@mui/material/CardMedia";
 import Carousel from "react-material-ui-carousel";
 import Box from "@mui/material/Box";
 import propTypes from "prop-types";
-import background from "../assets/wallpaper.png";
-import ProductDetails from "./ProductDetails";
+import background from "../../assets/wallpaper.png";
+import ProductDetails from "../../pages/ProductDetails";
+import { useSelector } from "react-redux";
 
 const ProductSlider = () => {
   const [products, setProducts] = useState([]);
@@ -20,7 +21,6 @@ const ProductSlider = () => {
   useEffect(() => {
     fetchallProducts();
   }, []);
-
   const Item = (props) => {
     return (
       <Card>
@@ -57,10 +57,6 @@ const ProductSlider = () => {
   // };
   return (
     <>
-      {/* <div
-        className="card"
-        style={{ width: "18rem", marginTop: "150px", alignContent: "center" }}
-      > */}
       <div
         style={{
           backgroundImage: `url(${background})`,
@@ -89,7 +85,7 @@ const ProductSlider = () => {
           </Box>
         </div>
       </div>
-      <div className="container">
+      <div className="card" style={{ display: "flex" }}>
         {products?.map((item) => (
           <ProductDetails key={item.id} product={item} />
         ))}
