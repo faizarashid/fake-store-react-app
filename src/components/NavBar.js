@@ -20,7 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CartIcon from "../assets/cart.svg";
 
 const drawerWidth = 240;
-const navItems = ["Home", "Products", "Contact"];
+const navItems = ["Home", "Products", "Contact", "login"];
 
 function NavBar(props) {
   const [toggle, setToggle] = React.useState(false);
@@ -31,8 +31,8 @@ function NavBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const { cartItems } = useContext(CartContext);
-
+  // const { cartItems } = useContext(CartContext);
+  const cartItems = [];
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>

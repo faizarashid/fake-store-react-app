@@ -56,11 +56,10 @@ const Login = ({ token, setToken }) => {
       >
         <h1>Create User in Fake Shop - API:</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="email">E-mail:</label>
+          <label htmlFor="email">UserName:</label>
           <TextField
-            type="email"
+            type=""
             id="email"
-            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             variant="standard"

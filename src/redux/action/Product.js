@@ -6,17 +6,16 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsRequest } from "./ActionTypes";
 
 const Product = () => {
-  const [products, setProducts] = useState([]);
-  async function fetchallProducts() {
-    const result = await (
-      await fetch("https://fakestoreapi.com/products")
-    ).json();
-    setProducts(result);
-  }
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.productsReducer.products);
+
   useEffect(() => {
-    fetchallProducts();
+    console.log(getProductsRequest());
+    dispatch(getProductsRequest());
   }, []);
   return (
     <>

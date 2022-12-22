@@ -7,19 +7,13 @@ import Box from "@mui/material/Box";
 import propTypes from "prop-types";
 import background from "../../assets/wallpaper.png";
 import ProductDetails from "../../pages/ProductDetails";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsRequest } from "../../redux/action/ActionTypes";
 const ProductSlider = () => {
-  const [products, setProducts] = useState([]);
-  async function fetchallProducts() {
-    const result = await (
-      await fetch("https://fakestoreapi.com/products")
-    ).json();
-    setProducts(result);
-  }
-
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.productsReducer.products);
   useEffect(() => {
-    fetchallProducts();
+    dispatch(getProductsRequest());
   }, []);
   const Item = (props) => {
     return (

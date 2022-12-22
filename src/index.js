@@ -3,15 +3,25 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import CartState from "./Context/Cart/CartState";
+import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
-
+import { combineReducers, createStore, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
+import thunkMiddleware from "redux-thunk";
+import CartReducer from "./redux/reducer/CartReducer";
+import ProductReducer from "./redux/reducer/ProductReducer";
+import getAllProducts from "./redux/saga/ProductSaga";
+const sagaMiddleware = createSagaMiddleware();
+const rootReducer = combineReducers({ ProductReducer });
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(getAllProducts);
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
-    <CartState>
+    <Provider store={store}>
       <App />
-    </CartState>
+    </Provider>
   </React.StrictMode>
 );
 

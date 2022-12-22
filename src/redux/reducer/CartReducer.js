@@ -1,4 +1,7 @@
-import { REMOVE_ITEM, ADD_TO_CART } from "../action/CartTypes";
+import { REMOVE_ITEM, ADD_TO_CART } from "../action/ActionTypes";
+const initialState = {
+  cartItems: [],
+};
 export const sumItems = (cartItems) => {
   Storage(cartItems);
   let itemCount = cartItems.reduce(
@@ -16,7 +19,7 @@ const Storage = (cartItems) => {
     JSON.stringify(cartItems.length > 0 ? cartItems : [])
   );
 };
-const CartReducer = (state, action) => {
+const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case REMOVE_ITEM:
       return {
