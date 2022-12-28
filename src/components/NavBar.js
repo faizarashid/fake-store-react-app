@@ -18,6 +18,8 @@ import CartContext from "../Context/Cart/CartContext";
 import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CartIcon from "../assets/cart.svg";
+import { useSelect } from "@mui/base";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 const navItems = ["Home", "Products", "Contact", "login"];
@@ -32,7 +34,10 @@ function NavBar(props) {
     setMobileOpen(!mobileOpen);
   };
   // const { cartItems } = useContext(CartContext);
-  const cartItems = [];
+  const cartItems = useSelector((state) => {
+    console.log(state);
+    return state.CartReducer.cartItems;
+  });
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>

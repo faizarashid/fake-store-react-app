@@ -11,3 +11,9 @@ export const GET_CATEGORIES_SUCCESS = "GET_CATEGORIES_SUCCESS";
 export const getProductsRequest = () => ({
   type: GET_PRODUCTS_FETCH,
 });
+export const getAllCart = (product) => ({
+  type: ADD_TO_CART,
+  payload: {
+    product,
+  },
+});

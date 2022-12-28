@@ -17,6 +17,7 @@ const Router = () => {
   return (
     <>
       <NavBar />
+      <Home />
       <Routes>
         {token ? (
           <>

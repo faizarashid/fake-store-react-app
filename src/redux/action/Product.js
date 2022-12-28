@@ -11,7 +11,7 @@ import { getProductsRequest } from "./ActionTypes";
 
 const Product = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.productsReducer.products);
+  const products = useSelector((state) => state.ProductReducer.products);
 
   useEffect(() => {
     console.log(getProductsRequest());

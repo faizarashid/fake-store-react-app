@@ -11,7 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductsRequest } from "../../redux/action/ActionTypes";
 const ProductSlider = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.productsReducer.products);
+  const products = useSelector((state) => {
+    console.log(state);
+    return state.ProductReducer.products;
+  });
   useEffect(() => {
     dispatch(getProductsRequest());
   }, []);
@@ -51,7 +54,7 @@ const ProductSlider = () => {
   // };
   return (
     <>
-      <div
+      {/* <div
         style={{
           backgroundImage: `url(${background})`,
           backgroundPosition: "center",
@@ -78,7 +81,7 @@ const ProductSlider = () => {
             </Carousel>
           </Box>
         </div>
-      </div>
+      </div> */}
       <div className="card" style={{ display: "flex" }}>
         {products?.map((item) => (
           <ProductDetails key={item.id} product={item} />

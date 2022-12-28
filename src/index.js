@@ -10,11 +10,11 @@ import createSagaMiddleware from "redux-saga";
 import thunkMiddleware from "redux-thunk";
 import CartReducer from "./redux/reducer/CartReducer";
 import ProductReducer from "./redux/reducer/ProductReducer";
-import getAllProducts from "./redux/saga/ProductSaga";
+import watchAll from "./redux/saga/rootSaga";
 const sagaMiddleware = createSagaMiddleware();
-const rootReducer = combineReducers({ ProductReducer });
+const rootReducer = combineReducers({ ProductReducer, CartReducer });
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(getAllProducts);
+sagaMiddleware.run(watchAll);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(

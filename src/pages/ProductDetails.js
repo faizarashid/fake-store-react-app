@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import CartContext from "../Context/Cart/CartContext";
 import { useContext } from "react";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCart } from "../redux/action/ActionTypes";
 
 const ProductDetails = ({ product }) => {
-  const { addToCart, cartItems } = useContext(CartContext);
-
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => {
+    console.log(state);
+    return state.CartReducer.cartItems;
+  });
   //Check whether the product is in the cart or not
   const isInCart = (product) => {
     return !!cartItems.find((item) => item.id === product.id);
@@ -19,7 +24,9 @@ const ProductDetails = ({ product }) => {
       <ProductCardPrice>{product.price}</ProductCardPrice>
       <ProductCardButtons>
         {!isInCart(product) && (
-          <Button onClick={() => addToCart(product)}>Add to Cart</Button>
+          <Button onClick={() => dispatch(getAllCart(product))}>
+            Add to Cart
+          </Button>
         )}
       </ProductCardButtons>
     </CardWrapper>
