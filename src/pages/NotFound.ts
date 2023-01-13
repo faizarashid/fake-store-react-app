@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
-export function NotFound() {
+const NotFound= ()=> {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -9,7 +9,6 @@ export function NotFound() {
       navigate("/"); // -1 or -2 backward
     }, 1000);
   }, []);
-
   // return <Navigate to="/"/>
 }
 export default NotFound;

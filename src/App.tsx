@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Router from "./Router";
 
-function App() {
+const App = () => {
   return (
     <>
       <div className="Container">
@@ -12,6 +12,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
 export default App;

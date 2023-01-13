@@ -1,30 +1,31 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import CartContext from "../Context/Cart/CartContext";
 import { useContext } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCart } from "../redux/action/ActionTypes";
+import { getAllCart, addToCart } from "../redux/action/ActionTypes";
+import React from "react";
+import { product as productType } from "../types/types";
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = (product: any) => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => {
+  const cartItems = useSelector((state: any) => {
     console.log(state);
     return state.CartReducer.cartItems;
   });
   //Check whether the product is in the cart or not
-  const isInCart = (product) => {
-    return !!cartItems.find((item) => item.id === product.id);
+  const isInCart = (product: productType) => {
+    return !!cartItems.find((item: productType) => item.id === product.id);
   };
 
   return (
     <CardWrapper>
-      <ProductImage src={product.image} alt={product.title} />
+      <ProductImage src={product!.image} alt={product!.title} />
       <ProductName>{product.title}</ProductName>
       <ProductCardPrice>{product.price}</ProductCardPrice>
       <ProductCardButtons>
         {!isInCart(product) && (
-          <Button onClick={() => dispatch(getAllCart(product))}>
+          <Button onClick={() => dispatch(addToCart(product))}>
             Add to Cart
           </Button>
         )}

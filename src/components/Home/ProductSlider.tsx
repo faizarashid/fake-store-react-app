@@ -5,20 +5,20 @@ import CardMedia from "@mui/material/CardMedia";
 import Carousel from "react-material-ui-carousel";
 import Box from "@mui/material/Box";
 import propTypes from "prop-types";
-import background from "../../assets/wallpaper.png";
 import ProductDetails from "../../pages/ProductDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsRequest } from "../../redux/action/ActionTypes";
+import { product } from "../../types/types";
 const ProductSlider = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => {
+  const products = useSelector((state: any) => {
     console.log(state);
     return state.ProductReducer.products;
   });
   useEffect(() => {
     dispatch(getProductsRequest());
   }, []);
-  const Item = (props) => {
+  const Item = (props: any) => {
     return (
       <Card>
         <CardMedia
@@ -83,7 +83,7 @@ const ProductSlider = () => {
         </div>
       </div> */}
       <div className="card" style={{ display: "flex" }}>
-        {products?.map((item) => (
+        {products?.map((item: any) => (
           <ProductDetails key={item.id} product={item} />
         ))}
       </div>

@@ -14,17 +14,15 @@ import PropTypes from "prop-types";
 import * as React from "react";
 import styled from "styled-components";
 import { NavLink, useLocation } from "react-router-dom";
-import CartContext from "../Context/Cart/CartContext";
 import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CartIcon from "../assets/cart.svg";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useSelect } from "@mui/base";
 import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 const navItems = ["Home", "Products", "Contact", "login"];
-
-function NavBar(props) {
+function NavBar(props: any) {
   const [toggle, setToggle] = React.useState(false);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -34,7 +32,7 @@ function NavBar(props) {
     setMobileOpen(!mobileOpen);
   };
   // const { cartItems } = useContext(CartContext);
-  const cartItems = useSelector((state) => {
+  const cartItems = useSelector((state: any) => {
     console.log(state);
     return state.CartReducer.cartItems;
   });
@@ -122,7 +120,7 @@ function NavBar(props) {
             <p>Cart</p>
             <i className="fas fa-shopping-cart"></i>
             <NavCartItem>
-              <img src={CartIcon} alt="Shopping cart" />
+              <AddShoppingCartIcon />
               {/* If the number of cartItems is greater than 0, display the
                     number of items in the cart */}
               {cartItems.length > 0 && (

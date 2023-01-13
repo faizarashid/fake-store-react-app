@@ -1,8 +1,10 @@
 import { Button } from "bootstrap";
-
-const Cart = () => {
+import { Link } from "react-router-dom";
+import React from "react";
+import ProductDetails from "./ProductDetails";
+import { product as productType } from "../types/types";
+const Cart = (cartItems:[]) => {
     // Extract the cart state from the context
-    const { cartItems, checkout, clearCart } = useContext(CartContext);
   
     return (
       <>
@@ -13,15 +15,12 @@ const Cart = () => {
           </h1>
         </div>
   
-        {checkout && (
           <div>
             <h4>Thank you for your purchase!</h4>
             <Link to="/">
-              <Button onClick={clearCart}>Continue Shopping</Button>
+              <button >Continue Shopping</button>
             </Link>
-          </div>
-        )}
-  
+          </div>  
         <div>
           <div>
             {
@@ -32,19 +31,15 @@ const Cart = () => {
                   <h4 style={{}}>Cart is empty</h4>
                 ) : (
                   <ul>
-                    {cartItems.map((product) => (
-                      <CartItem key={product.id} product={product} />
+                    {cartItems.map((product:any) => (
+                      <ProductDetails key={product.id} product={product} />
                     ))}
                   </ul>
                 )}
               </div>
             }
           </div>
-  
-          <div>
-            {/* Checkout component  */}
-            {cartItems.length > 0 && <Checkout />}
-          </div>
+
         </div>
       </>
     );

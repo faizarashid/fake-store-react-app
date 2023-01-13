@@ -7,11 +7,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsRequest } from "./ActionTypes";
+import { getProductsRequest } from "../redux/action/ActionTypes";
 
 const Product = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.ProductReducer.products);
+  const products = useSelector((state: any) => state.ProductReducer.products);
 
   useEffect(() => {
     console.log(getProductsRequest());
@@ -19,16 +19,16 @@ const Product = () => {
   }, []);
   return (
     <>
-      {products?.map((item) => (
+      {products?.map((item: any) => (
         <Box key={item.id} sx={{ maxWidth: 400, flexGrow: 1 }}>
-          <Card sx={{ maxWidth: 345 }} display="inline">
+          <Card style={{ maxWidth: 345, display: "inline" }}>
             <CardMedia
               component="img"
               alt="green iguana"
               height="140"
               image={`${item.image}`}
             />
-            <CardContent display="inline">
+            <CardContent style={{ maxWidth: 345, display: "inline" }}>
               <Typography gutterBottom variant="h5" component="div">
                 {item.title}
               </Typography>

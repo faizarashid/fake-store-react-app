@@ -15,7 +15,14 @@ const fetchallProducts = async () => {
   }
 };
 function* GetAllProductsFetch() {
-  const products = yield call(fetchallProducts);
+  let products: {
+    id: number;
+    title: String;
+    price: String;
+    category: String;
+    description: String;
+    image: String;
+  }[] = yield call(fetchallProducts);
   yield put({ type: GET_PRODUCTS_SUCCESS, products });
   console.log(products);
 }

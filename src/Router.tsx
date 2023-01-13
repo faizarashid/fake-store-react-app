@@ -9,8 +9,9 @@ import NavBar from "./components/NavBar";
 import userToken from "./components/userToken";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import Login from "./redux/action/Login";
-import Product from "./redux/action/Product";
+import Login from "./pages/Login";
+import Product from "./pages/Product";
+import React from "react";
 const Router = () => {
   const [token, setToken] = userToken();
 
@@ -25,14 +26,11 @@ const Router = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Product />} />
-            <Route path="*" element={<NotFound />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
           </>
         ) : (
           <>
-            <Route
-              path="/login"
-              element={<Login token={token} setToken={setToken} />}
-            />
+            <Route path="/login" element={<Login />} />
             <Route path="/products" element={<Product />} />
           </>
         )}

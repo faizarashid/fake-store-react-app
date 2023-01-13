@@ -5,37 +5,38 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import propTypes from "prop-types";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { loginUserAction } from "../redux/action/ActionTypes";
 
-const Login = ({ token, setToken }) => {
+const Login = () => {
+  const token = localStorage.getItem("userToken");
   const [data, setData] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  function fetchRequest() {
-    axios("https://fakestoreapi.com/auth/login", {
-      method: "POST",
-      data: {
-        username: email,
-        password: password,
-      },
-    })
-      .then((response) => {
-        setToken(response.data.token);
-        localStorage.setItem("userToken", response.data.token);
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
-  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchRequest();
+    dispatch(
+      loginUserAction({
+        username: email,
+        password: password,
+      })
+    );
   };
-  Login.propTypes = {
-    setToken: propTypes.func,
-    token: propTypes.string,
-  };
+  // type Login = {
+  //   login: LoginpropTypes;
+  // };
+  // interface LoginpropTypes {
+  //   setToken: any;
+  //   token: String;
+  // }
+  // Login.propTypes = {
+  //   setToken: propTypes.func,
+  //   token: propTypes.string,
+  // };
+
   return (
     <>
       <img src="../assets/login.jpeg" />
@@ -45,6 +46,7 @@ const Login = ({ token, setToken }) => {
           height: 300,
           marginTop: "200px",
           marginLeft: "500px",
+          justifyContent: "centre",
           backgroundColor: "primary.dark",
           padding: "20px",
           borderRadius: "15px",
