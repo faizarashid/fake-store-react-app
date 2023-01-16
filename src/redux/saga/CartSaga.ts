@@ -17,8 +17,7 @@ const fetchallCart = async () => {
   }
 };
 function* cartSaga() {
-  yield takeEvery(GET_ALL_CART, GetAllCart);
-  yield takeEvery(ADD_TO_CART, fetchallCart);
+  yield takeEvery(ADD_TO_CART, GetAllCart);
 }
 
 export default cartSaga;

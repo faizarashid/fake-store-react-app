@@ -5,12 +5,12 @@ import {
   LOGIN_USER_SUCCESS,
 } from "../action/ActionTypes";
 import GetAllProductsFetch from "./ProductSaga";
-import fetchallCart from "./CartSaga";
+import GetAllCart from "./CartSaga";
 import loginSaga from "./LoginSaga";
 function* watchAll() {
   yield all([
     takeEvery(GET_PRODUCTS_FETCH, GetAllProductsFetch),
-    takeEvery(ADD_TO_CART, fetchallCart),
+    takeEvery(ADD_TO_CART, GetAllCart),
     takeEvery(LOGIN_USER_SUCCESS, loginSaga),
   ]);
 }

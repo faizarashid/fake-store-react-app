@@ -1,8 +1,9 @@
 import { REMOVE_ITEM, ADD_TO_CART } from "../action/ActionTypes";
 import { product, cartState } from "../../types/types";
+import { any } from "prop-types";
 
 const initialState = {
-  cartItems: [{}],
+  cartItems: [any],
 };
 export const sumItems = (cartItems) => {
   Storage(cartItems);

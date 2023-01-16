@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCart, addToCart } from "../redux/action/ActionTypes";
+import { addToCart } from "../redux/action/ActionTypes";
 import React from "react";
 import { product as productType } from "../types/types";
 
@@ -20,7 +18,7 @@ const ProductDetails = (product: any) => {
 
   return (
     <CardWrapper>
-      <ProductImage src={product!.image} alt={product!.title} />
+      <ProductImage src={product.image} alt={product.title} />
       <ProductName>{product.title}</ProductName>
       <ProductCardPrice>{product.price}</ProductCardPrice>
       <ProductCardButtons>

@@ -5,12 +5,14 @@ import { LOGIN_USER_SUCCESS } from "../action/ActionTypes";
 
 // const navigate = useNavigate();
 function* loginSaga(payload) {
-  const response = yield call(loginUserService, payload);
-  yield put({ type: LOGIN_USER_SUCCESS, response });
-
-  console.log(response);
+  const token = payload
+    ? yield call(loginUserService, payload.payload.user)
+    : "";
+  yield put({ type: LOGIN_USER_SUCCESS, token });
+  console.log(token);
 }
 const loginUserService = async (payload) => {
+  console.log("Message: Inside login userService");
   const result = await axios("https://fakestoreapi.com/auth/login", {
     method: "POST",
     data: payload,
@@ -18,7 +20,7 @@ const loginUserService = async (payload) => {
   localStorage.setItem("userToken", result.data.token);
   //   navigate("/");
 
-  return result.data;
+  return result.data.token;
 };
 function* getLogin() {
   yield takeEvery(LOGIN_USER_SUCCESS, loginSaga);

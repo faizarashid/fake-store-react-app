@@ -8,10 +8,20 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsRequest } from "../redux/action/ActionTypes";
+import { addToCart } from "../redux/action/ActionTypes";
+import { product as productType } from "../types/types";
 
 const Product = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: any) => state.ProductReducer.products);
+  const cartItems = useSelector((state: any) => {
+    console.log(state);
+    return state.CartReducer.cartItems;
+  });
+  //Check whether the product is in the cart or not
+  const isInCart = (product: productType) => {
+    return !!cartItems.find((item: productType) => item.id === product.id);
+  };
 
   useEffect(() => {
     console.log(getProductsRequest());
@@ -20,15 +30,24 @@ const Product = () => {
   return (
     <>
       {products?.map((item: any) => (
-        <Box key={item.id} sx={{ maxWidth: 400, flexGrow: 1 }}>
-          <Card style={{ maxWidth: 345, display: "inline" }}>
+        <Box
+          key={item.id}
+          sx={{
+            maxWidth: 400,
+            flexGrow: 1,
+            display: "inline-block",
+            marginLeft: 10,
+            marginRight: 5,
+          }}
+        >
+          <Card style={{ maxWidth: 400, display: "inline" }}>
             <CardMedia
               component="img"
               alt="green iguana"
-              height="140"
+              height="200"
               image={`${item.image}`}
             />
-            <CardContent style={{ maxWidth: 345, display: "inline" }}>
+            <CardContent style={{ maxWidth: 400, display: "inline" }}>
               <Typography gutterBottom variant="h5" component="div">
                 {item.title}
               </Typography>
@@ -40,8 +59,10 @@ const Product = () => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Share</Button>
               <Button size="small">Learn More</Button>
+              <Button onClick={() => dispatch(addToCart(item))}>
+                Add to Cart
+              </Button>
             </CardActions>
           </Card>
         </Box>
